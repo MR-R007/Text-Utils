@@ -1,24 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import Navbar from "./components/NavigationBar/Navbar";
+import InputTextArea from "./components/TextArea/InputTextArea";
+import { useState } from "react";
 
 function App() {
+  const [toggleNavColor, setToggleNavColor] = useState('light');
+  const [toggleTitleStyle, setToggleTitleStyle] = useState('dark');
+  const [toggleSwitchText, setToggleSwitchText] = useState("Dark Mode");
+
+  function handleToggleStyle() {
+    if(toggleNavColor === 'light') {
+      setToggleNavColor('dark');
+      setToggleTitleStyle('light');
+      setToggleSwitchText("Light Mode");
+      document.body.style.backgroundColor="#163158";
+    }
+    else {
+      setToggleNavColor('light');
+      setToggleTitleStyle('dark');
+      setToggleSwitchText("Dark Mode");
+      document.body.style.backgroundColor="white";
+    }
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <> 
+      <Navbar title="Text Utils" navStyle={toggleNavColor} handleToggleStyle={handleToggleStyle} titleStyle={toggleTitleStyle} switchText={toggleSwitchText}/>
+      <div className="container">
+        <InputTextArea textStyle={toggleTitleStyle}/>
+      </div>
+    </>
   );
 }
 
